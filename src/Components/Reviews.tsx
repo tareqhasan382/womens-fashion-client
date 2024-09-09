@@ -1,36 +1,37 @@
 import { useState } from "react";
 import StarRating from "./StarRating";
+import { useCreateReviewMutation } from "../Redux/reviews/reviewApi";
+import { toast } from "react-toastify";
 
 interface ReviewFormProps {
-  productId: string;
+  productId: string | undefined;
 }
 
 const Reviews: React.FC<ReviewFormProps> = ({ productId }) => {
+  const [createReview, { isLoading }] = useCreateReviewMutation();
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("review:", {
-      productId,
-      rating: parseFloat(rating.toFixed(1)),
-      comment,
-    });
-    //   try {
-    //     await axios.post("/api/reviews", {
-    //       productId,
-    //       rating: parseFloat(rating.toFixed(1)),
-    //       comment,
-    //     });
-    //     alert("Review submitted successfully!");
-    //   } catch (error) {
-    //     alert("Failed to submit review");
-    //   }
+
+    const data = {
+      product: productId,
+      rating: rating,
+      comment: comment,
+    };
+    const result = await createReview(data);
+    if (result?.data) {
+      return toast.success("review submitted successfully!");
+    }
+    if (result?.error) {
+      return toast.error("You Are Not Authorized!");
+    }
   };
 
   return (
     <>
-      <div className=" w-full lg:px-10 px-3 py-20 ">
+      <div className=" w-full lg:px-10 px-3 pt-20 ">
         <h3 className=" font-bold text-xl ">Write Your Own Review</h3>
 
         <form onSubmit={handleSubmit} className=" py-3 flex flex-col gap-3 ">
@@ -49,7 +50,10 @@ const Reviews: React.FC<ReviewFormProps> = ({ productId }) => {
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
-          <button className=" lg:w-[300px] w-full h-[45px] bg-black text-white rounded font-semibold ">
+          <button
+            disabled={isLoading}
+            className=" lg:w-[300px] w-full h-[45px] bg-black text-white rounded font-semibold "
+          >
             Submit Review
           </button>
         </form>

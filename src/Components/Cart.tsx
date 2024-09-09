@@ -8,20 +8,20 @@ import {
 } from "../Redux/cardSlice";
 import { useAppDispatch, useAppSelector } from "../Redux/hooks";
 import { BiMinusCircle, BiPlusCircle, BiTrash } from "react-icons/bi";
+import { CalculateDiscountPrice } from "../utils/CalculateDiscountPrice";
 
 const Cart: React.FC = () => {
-  // const navigate = useNavigate();
   //=======================Get data=================================
   const dispatch = useAppDispatch();
 
   const { products } = useAppSelector((state) => state.cart);
-
   const totalPrice: number = products
     .map((item: IProduct) => {
       // Ensure item.price is a string before using replace
-      const numericPrice: number = parseFloat(
-        String(item.price).replace("$", "")
-      );
+      const numericPrice: number = CalculateDiscountPrice(
+        item.price,
+        item.discountedPrice
+      ); // parseFloat(String(item.price));
       return item.quantity! * numericPrice;
     })
     .reduce(
@@ -29,7 +29,6 @@ const Cart: React.FC = () => {
       0
     );
 
-  // console.log(`Total Price: $${totalPrice.toFixed(2)}`);
   return (
     <div className="bg-white w-full min-h-full pb-20 mb-5 rounded ">
       <div className=" w-full flex flex-col ">
@@ -62,29 +61,31 @@ const Cart: React.FC = () => {
               <div className=" gap-2 w-full p-1 ">
                 {products.map((item: IProduct) => (
                   <div
-                    key={item.id}
+                    key={item._id}
                     className=" bg-white duration-300 h-auto flex items-center justify-between outline rounded-md outline-1 outline-black "
                   >
                     <img
-                      src={item?.img}
+                      src={item?.images[0]}
                       alt="img"
                       className=" w-[70px] h-[70px] pl-2 "
                     />
-                    <div className=" flex flex-col ">
+                    <div className=" pl-2 flex flex-col ">
                       <p className="  ">
-                        Name:
-                        <span className=" font-bold ">{item.name} </span>
+                        <span className=" font-normal ">{item.name} </span>
                       </p>
                       <p>
-                        Price:{" "}
+                        BD:
                         <span className="text-base font-bold">
-                          ${item.price}{" "}
+                          {CalculateDiscountPrice(
+                            item.price,
+                            item.discountedPrice
+                          )}
                         </span>
                       </p>
                       <p>
                         quantity:{" "}
                         <span className="text-base font-bold">
-                          {item.quantity}{" "}
+                          {item.quantity}
                         </span>
                       </p>
                     </div>

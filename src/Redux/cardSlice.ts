@@ -4,13 +4,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface IProduct {
-  id: string;
+  _id: string;
   name: string;
   size?: string;
-  img?: string;
+  images: string[];
   price: number;
   color?: number;
   quantity?: number;
+  discountedPrice: number;
 }
 interface ICart {
   products: IProduct[];
@@ -34,7 +35,7 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action: PayloadAction<IProduct>) => {
       const existing = state.products.find(
-        (item: IProduct) => item.id === action.payload.id
+        (item: IProduct) => item._id === action.payload._id
       );
 
       if (existing) {
@@ -43,8 +44,6 @@ const cartSlice = createSlice({
         toast.info(` Increase SuccessFully`);
         // existing.total += action.payload.price;
       } else {
-        // Item is not in the cart, add it
-
         state.products.push({
           ...action.payload,
           quantity: 1,
@@ -55,16 +54,32 @@ const cartSlice = createSlice({
       localStorage.setItem("cartItem", JSON.stringify(state.products));
     },
     //Remove One Cart
+    increaseQuantity: (state, action: PayloadAction<IProduct>) => {
+      const existing = state.products.find(
+        (item: IProduct) => item._id === action.payload._id
+      );
+      if (existing && existing.quantity! > 1) {
+        existing.quantity = existing.quantity! + 1;
+        toast.warning(` Increase to Cart SuccessFully`);
+      } else {
+        state.products = state.products.filter(
+          (item: IProduct) => item._id !== action.payload._id
+        );
+        toast.error(` Deleted to Cart SuccessFully`, { icon: false });
+      }
+      localStorage.setItem("cartItem", JSON.stringify(state.products));
+    },
+    //Remove One Cart
     removeOne: (state, action: PayloadAction<IProduct>) => {
       const existing = state.products.find(
-        (item: IProduct) => item.id === action.payload.id
+        (item: IProduct) => item._id === action.payload._id
       );
       if (existing && existing.quantity! > 1) {
         existing.quantity = existing.quantity! - 1;
         toast.warning(` Decrease to Cart SuccessFully`);
       } else {
         state.products = state.products.filter(
-          (item: IProduct) => item.id !== action.payload.id
+          (item: IProduct) => item._id !== action.payload._id
         );
         toast.error(` Deleted to Cart SuccessFully`, { icon: false });
       }
@@ -74,7 +89,7 @@ const cartSlice = createSlice({
     //==========
     removeFromCart: (state, action: PayloadAction<IProduct>) => {
       state.products = state.products.filter(
-        (item: IProduct) => item.id !== action.payload.id
+        (item: IProduct) => item._id !== action.payload._id
       );
       localStorage.setItem("cartItem", JSON.stringify(state.products));
       toast.error(`Deleted to Cart SuccessFully`, {

@@ -3,7 +3,7 @@ import StarRatings from "react-star-ratings";
 
 interface StarRatingProps {
   rating: number;
-  onChange: (newRating: number) => void;
+  onChange?: (newRating: number) => void;
 }
 
 const StarRating: React.FC<StarRatingProps> = ({ rating, onChange }) => {

@@ -2,15 +2,18 @@ import logo from "../assets/Couturelabs_logo.png";
 import { CiSearch } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import { FaRegHeart } from "react-icons/fa";
-import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { LuShoppingCart } from "react-icons/lu";
 import { FaAngleDown } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { IoMenuSharp } from "react-icons/io5";
 import Sidebar from "./Sidebar";
 import CartPage from "./CartPage";
+import { useAppSelector } from "../Redux/hooks";
 
 const Navbar = () => {
+  const { products } = useAppSelector((state) => state.cart);
+  // console.log("Product:", products?.length);
   const [showNav, setShowNav] = useState<boolean>(false);
   const [openCart, setOpenCart] = useState<boolean>(false);
   const toggleCart = () => {
@@ -40,27 +43,30 @@ const Navbar = () => {
             </Link>
           </div>
         </div>
-        <div className=" w-[150px] flex gap-2 py-1 text-black ">
+        <div className=" relative w-[150px] flex gap-2 py-1 text-black ">
           <CiSearch size={25} className="cursor-pointer" />
           <CiUser size={25} className="cursor-pointer" />
           <FaRegHeart size={25} className="cursor-pointer" />
-          <HiOutlineShoppingBag
+          <LuShoppingCart
             onClick={toggleCart}
             size={25}
             className="cursor-pointer  "
           />
+          <span className=" absolute w-[20px] text-center right-6 -top-3 ">
+            {products ? products.length : 0}
+          </span>
         </div>
       </div>
       {/* logo section end*/}
       {/* dekstop menu section start*/}
       <div className=" ">
-        <ul className=" w-full max-md:hidden uppercase flex xl:gap-5 text-black xl:text-base md:text-[14px] portrait:md:text-[8px]  text-sm xl:font-medium md:font-light font-normal ">
-          <li className=" text-red-500 ">
+        <div className=" w-full max-md:hidden uppercase flex xl:gap-5 text-black xl:text-base md:text-[14px] portrait:md:text-[8px]  text-sm xl:font-medium md:font-light font-normal ">
+          <div className=" text-red-500 ">
             <Link className="flex items-center gap-[2px] h-[80px]" to="/sale">
               Sale
             </Link>
-          </li>
-          <li className="relative group cursor-pointe ">
+          </div>
+          <div className="relative group cursor-pointe ">
             <h1 className="flex items-center gap-[2px] h-[80px]">
               Trending now
               <span>
@@ -73,21 +79,33 @@ const Navbar = () => {
             {/* Dropdown section start top-[52px] w-[150px]*/}
             <div className="absolute  z-[99] hidden w-full bg-white shadow-md p-2 text-black rounded-md group-hover:block transition-all duration-200 ">
               <ul className=" py-2 w-full font-normal ">
-                <li className=" p-2 hover:bg-gray-200 capitalize  ">New In</li>
-                <li className=" p-2 hover:bg-gray-200 capitalize  ">
-                  Vacation Edit
-                </li>
-                <li className=" p-2 hover:bg-gray-200 capitalize  ">
-                  Lucky Sizes
-                </li>
-                <li className=" p-2 hover:bg-gray-200 capitalize  ">
-                  Curvy Chic
-                </li>
+                <Link to="new-in">
+                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
+                    New In
+                  </li>
+                </Link>
+                <Link to="vacation-edit">
+                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
+                    Vacation Edit
+                  </li>
+                </Link>
+                <Link to="/lucky-sizes">
+                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
+                    Lucky Sizes
+                  </li>
+                </Link>
+
+                <Link to="curvy-chic">
+                  {" "}
+                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
+                    Curvy Chic
+                  </li>
+                </Link>
               </ul>
             </div>
             {/* Dropdown section end */}
-          </li>
-          <li className="relative group cursor-pointe ">
+          </div>
+          <div className="relative group cursor-pointe ">
             <h1 className="flex items-center gap-[2px] h-[80px]">
               Clothing
               <span>
@@ -100,25 +118,51 @@ const Navbar = () => {
             {/* Dropdown section start top-[52px] w-[150px]*/}
             <div className="absolute z-[99] hidden w-[300px] bg-white shadow-md p-2 text-black rounded-md group-hover:block transition-all duration-200 ">
               <ul className=" py-2 grid grid-cols-2 font-normal ">
-                <li className=" p-2 hover:bg-gray-200 capitalize ">Dresses</li>
-                <li className=" p-2 hover:bg-gray-200 capitalize ">Abayas</li>
-                <li className=" p-2 hover:bg-gray-200 capitalize ">Kaftans</li>
-                <li className=" p-2 hover:bg-gray-200 capitalize ">
-                  Co-ord Sets
-                </li>
-                <li className=" p-2 hover:bg-gray-200 capitalize  ">Tops</li>
-                <li className=" p-2 hover:bg-gray-200 capitalize ">Bottoms</li>
-                <li className=" p-2 hover:bg-gray-200 capitalize  ">
-                  Beachwear
-                </li>
-                <li className=" p-2 hover:bg-gray-200 capitalize  ">
-                  Jumpsuit
-                </li>
+                <Link to="dresses">
+                  <li className=" p-2 hover:bg-gray-200 capitalize ">
+                    Dresses
+                  </li>
+                </Link>
+                <Link to="abayas">
+                  <li className=" p-2 hover:bg-gray-200 capitalize ">Abayas</li>
+                </Link>
+                <Link to="kaftans">
+                  <li className=" p-2 hover:bg-gray-200 capitalize ">
+                    Kaftans
+                  </li>
+                </Link>
+                <Link to="co-ord-sets">
+                  {" "}
+                  <li className=" p-2 hover:bg-gray-200 capitalize ">
+                    Co-ord Sets
+                  </li>
+                </Link>
+                <Link to="tops">
+                  <li className=" p-2 hover:bg-gray-200 capitalize  ">Tops</li>
+                </Link>
+                <Link to="bottoms">
+                  <li className=" p-2 hover:bg-gray-200 capitalize ">
+                    Bottoms
+                  </li>
+                </Link>
+                <Link to="beachwear">
+                  {" "}
+                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
+                    Beachwear
+                  </li>
+                </Link>
+
+                <Link to="jumpsuit">
+                  {" "}
+                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
+                    Jumpsuit
+                  </li>
+                </Link>
               </ul>
             </div>
             {/* Dropdown section end */}
-          </li>
-          <li className="relative group cursor-pointe ">
+          </div>
+          <div className="relative group cursor-pointe ">
             <h1 className="flex items-center gap-[2px] h-[80px]">
               Modestwear
               <span>
@@ -131,14 +175,26 @@ const Navbar = () => {
             {/* Dropdown section start top-[52px] w-[150px]*/}
             <div className="absolute z-[99] hidden w-full bg-white shadow-md p-2 text-black rounded-md group-hover:block transition-all duration-200 ">
               <ul className=" py-2 w-full font-normal">
-                <li className=" p-2 hover:bg-gray-200 capitalize  ">Abayas</li>
-                <li className=" p-2 hover:bg-gray-200 capitalize  ">Kaftans</li>
-                <li className=" p-2 hover:bg-gray-200 capitalize  ">Hijabs</li>
+                <Link to="modest-dresses/abayas">
+                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
+                    Abayas
+                  </li>
+                </Link>
+                <Link to="modest-dresses/kaftans">
+                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
+                    Kaftans
+                  </li>
+                </Link>
+                <Link to="modest-dresses/hijabs">
+                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
+                    Hijabs
+                  </li>
+                </Link>
               </ul>
             </div>
             {/* Dropdown section end */}
-          </li>
-          <li className="relative group cursor-pointe ">
+          </div>
+          <div className="relative group cursor-pointe ">
             <h1 className="flex items-center gap-[2px] h-[80px]">
               Accessories
               <span>
@@ -151,13 +207,20 @@ const Navbar = () => {
             {/* Dropdown section start top-[52px] w-[150px]*/}
             <div className="absolute z-[99] hidden w-full bg-white shadow-md p-2 text-black rounded-md group-hover:block transition-all duration-200 ">
               <ul className=" py-2 w-full font-normal">
-                <li className=" p-2 hover:bg-gray-200 capitalize  ">Bags</li>
-                <li className=" p-2 hover:bg-gray-200 capitalize  ">Hijabs</li>
+                <Link to="accessories/bags">
+                  {" "}
+                  <li className=" p-2 hover:bg-gray-200 capitalize  ">Bags</li>
+                </Link>
+                <Link to="accessories/hijabs">
+                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
+                    Hijabs
+                  </li>
+                </Link>
               </ul>
             </div>
             {/* Dropdown section end */}
-          </li>
-          <li className="relative group cursor-pointe ">
+          </div>
+          <div className="relative group cursor-pointe ">
             <h1 className="flex items-center gap-[2px] h-[80px]">
               Featured
               <span>
@@ -170,30 +233,47 @@ const Navbar = () => {
             {/* Dropdown section start top-[52px] w-[150px]*/}
             <div className="absolute z-[99] hidden w-[180px] bg-white shadow-md p-2 text-black rounded-md group-hover:block transition-all duration-200 ">
               <ul className=" py-2 w-full font-normal ">
-                <li className=" p-2 hover:bg-gray-200 capitalize ">Press</li>
-                <li className=" p-2 hover:bg-gray-200 capitalize  ">
-                  Blog Posts
-                </li>
-                <li className=" p-2 hover:bg-gray-200 capitalize ">Magazine</li>
-                <li className=" p-2 hover:bg-gray-200 capitalize  ">
-                  Influencer Edit
-                </li>
+                <Link to="press">
+                  <li className=" p-2 hover:bg-gray-200 capitalize ">Press</li>
+                </Link>
+                <Link to="blog">
+                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
+                    Blog Posts
+                  </li>
+                </Link>
+                <Link to="magazine">
+                  <li className=" p-2 hover:bg-gray-200 capitalize ">
+                    Magazine
+                  </li>
+                </Link>
+                <Link to="influencer-edit">
+                  {" "}
+                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
+                    Influencer Edit
+                  </li>
+                </Link>
               </ul>
             </div>
             {/* Dropdown section end */}
-          </li>
+          </div>
 
-          <li>
-            <Link className="flex items-center gap-[2px] h-[80px]" to="/about">
+          <div>
+            <Link
+              className="flex items-center gap-[2px] h-[80px]"
+              to="/about-us"
+            >
               About Us
             </Link>
-          </li>
-          <li>
-            <Link className="flex items-center gap-[2px] h-[80px]" to="/love">
+          </div>
+          <div>
+            <Link
+              className="flex items-center gap-[2px] h-[80px]"
+              to="/love-your-planet"
+            >
               Love your planet
             </Link>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
       {/*dekstop menu section end*/}
       {/*mobile menu section start*/}

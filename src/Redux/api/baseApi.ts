@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-export const BASEURL = "https://hotel-booking-backend-mocha.vercel.app/api/v1";
+export const BASEURL = "http://localhost:8000/api/";
 //  http://localhost:8000 ||
 export const baseApi = createApi({
   reducerPath: "api",
@@ -18,7 +18,7 @@ export const baseApi = createApi({
     },
   }),
   endpoints: () => ({}),
-  tagTypes: ["auth", "order"],
+  tagTypes: ["auth", "order", "review"],
 });
 
 export default baseApi;
