@@ -4,7 +4,7 @@ type QueryParams = {
   page: number;
   category?: string;
   sortField?: string;
-  sortOrder?: number;
+  sortOrder?: string;
 };
 export interface ProductResponse {
   _id: string;

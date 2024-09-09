@@ -60,7 +60,7 @@ const Navbar = () => {
       {/* logo section end*/}
       {/* dekstop menu section start*/}
       <div className=" ">
-        <div className=" w-full max-md:hidden uppercase flex xl:gap-5 text-black xl:text-base md:text-[14px] portrait:md:text-[8px]  text-sm xl:font-medium md:font-light font-normal ">
+        <div className=" w-full max-md:hidden uppercase flex xl:gap-5 text-black xl:text-base md:text-[14px] portrait:md:text-[12px]  xl:font-medium md:font-light font-normal gap-2 ">
           <div className=" text-red-500 ">
             <Link className="flex items-center gap-[2px] h-[80px]" to="/sale">
               Sale
@@ -89,7 +89,7 @@ const Navbar = () => {
                     Vacation Edit
                   </li>
                 </Link>
-                <Link to="/lucky-sizes">
+                {/* <Link to="/lucky-sizes">
                   <li className=" p-2 hover:bg-gray-200 capitalize  ">
                     Lucky Sizes
                   </li>
@@ -100,7 +100,7 @@ const Navbar = () => {
                   <li className=" p-2 hover:bg-gray-200 capitalize  ">
                     Curvy Chic
                   </li>
-                </Link>
+                </Link> */}
               </ul>
             </div>
             {/* Dropdown section end */}
@@ -132,7 +132,6 @@ const Navbar = () => {
                   </li>
                 </Link>
                 <Link to="co-ord-sets">
-                  {" "}
                   <li className=" p-2 hover:bg-gray-200 capitalize ">
                     Co-ord Sets
                   </li>
@@ -146,14 +145,12 @@ const Navbar = () => {
                   </li>
                 </Link>
                 <Link to="beachwear">
-                  {" "}
                   <li className=" p-2 hover:bg-gray-200 capitalize  ">
                     Beachwear
                   </li>
                 </Link>
 
                 <Link to="jumpsuit">
-                  {" "}
                   <li className=" p-2 hover:bg-gray-200 capitalize  ">
                     Jumpsuit
                   </li>
@@ -163,98 +160,19 @@ const Navbar = () => {
             {/* Dropdown section end */}
           </div>
           <div className="relative group cursor-pointe ">
-            <h1 className="flex items-center gap-[2px] h-[80px]">
-              Modestwear
-              <span>
-                <FaAngleDown
-                  size={20}
-                  className="group-hover:rotate-180 transition-transform duration-200 pt-1 cursor-pointer"
-                />
-              </span>
-            </h1>
-            {/* Dropdown section start top-[52px] w-[150px]*/}
-            <div className="absolute z-[99] hidden w-full bg-white shadow-md p-2 text-black rounded-md group-hover:block transition-all duration-200 ">
-              <ul className=" py-2 w-full font-normal">
-                <Link to="modest-dresses/abayas">
-                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
-                    Abayas
-                  </li>
-                </Link>
-                <Link to="modest-dresses/kaftans">
-                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
-                    Kaftans
-                  </li>
-                </Link>
-                <Link to="modest-dresses/hijabs">
-                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
-                    Hijabs
-                  </li>
-                </Link>
-              </ul>
-            </div>
-            {/* Dropdown section end */}
+            <Link to="hijabs" className="flex items-center gap-[2px] h-[80px]">
+              Hijabs
+            </Link>
           </div>
           <div className="relative group cursor-pointe ">
-            <h1 className="flex items-center gap-[2px] h-[80px]">
-              Accessories
-              <span>
-                <FaAngleDown
-                  size={20}
-                  className="group-hover:rotate-180 transition-transform duration-200 pt-1 cursor-pointer"
-                />
-              </span>
-            </h1>
-            {/* Dropdown section start top-[52px] w-[150px]*/}
-            <div className="absolute z-[99] hidden w-full bg-white shadow-md p-2 text-black rounded-md group-hover:block transition-all duration-200 ">
-              <ul className=" py-2 w-full font-normal">
-                <Link to="accessories/bags">
-                  {" "}
-                  <li className=" p-2 hover:bg-gray-200 capitalize  ">Bags</li>
-                </Link>
-                <Link to="accessories/hijabs">
-                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
-                    Hijabs
-                  </li>
-                </Link>
-              </ul>
-            </div>
-            {/* Dropdown section end */}
+            <Link to="bags" className="flex items-center gap-[2px] h-[80px]">
+              bags
+            </Link>
           </div>
           <div className="relative group cursor-pointe ">
-            <h1 className="flex items-center gap-[2px] h-[80px]">
-              Featured
-              <span>
-                <FaAngleDown
-                  size={20}
-                  className="group-hover:rotate-180 transition-transform duration-200 pt-1 cursor-pointer"
-                />
-              </span>
-            </h1>
-            {/* Dropdown section start top-[52px] w-[150px]*/}
-            <div className="absolute z-[99] hidden w-[180px] bg-white shadow-md p-2 text-black rounded-md group-hover:block transition-all duration-200 ">
-              <ul className=" py-2 w-full font-normal ">
-                <Link to="press">
-                  <li className=" p-2 hover:bg-gray-200 capitalize ">Press</li>
-                </Link>
-                <Link to="blog">
-                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
-                    Blog Posts
-                  </li>
-                </Link>
-                <Link to="magazine">
-                  <li className=" p-2 hover:bg-gray-200 capitalize ">
-                    Magazine
-                  </li>
-                </Link>
-                <Link to="influencer-edit">
-                  {" "}
-                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
-                    Influencer Edit
-                  </li>
-                </Link>
-              </ul>
-            </div>
-            {/* Dropdown section end */}
+            <Link to="blog" className="flex items-center gap-[2px] h-[80px]">
+              blog
+            </Link>
           </div>
 
           <div>

@@ -40,7 +40,7 @@ const AccessoriesBangs: React.FC = () => {
       ) : (
         <div className=" w-full h-full flex flex-col items-center justify-center mx-auto mb-20 ">
           <h1 className=" uppercase text-xl font-bold my-5 ">
-            Accessories Bangs
+            Accessories Bags
           </h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4 my-16">
             {data?.data && data.data.length > 0 ? (
@@ -75,7 +75,7 @@ const AccessoriesBangs: React.FC = () => {
                   {hoveredProductId === product._id && (
                     <button
                       onClick={() => dispatch(addToCart(product))}
-                      className=" duration-300 w-80 h-[50px] absolute right-2 bg-gray-800 text-white p-2 rounded-md flex items-center justify-center font-bold text-center bottom-28  "
+                      className=" duration-300 w-[90%] h-[50px] absolute right-2 bg-gray-800 text-white p-2 rounded-md flex items-center justify-center font-bold text-center bottom-28  "
                     >
                       <BiShoppingBag size={24} className=" mx-2 " /> Add to Cart
                     </button>

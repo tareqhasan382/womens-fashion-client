@@ -15,7 +15,7 @@ const Kaftans: React.FC = () => {
   const [hoveredProductId, setHoveredProductId] = useState<string | null>(null);
   const [limit] = useState<number>(20);
   const [page] = useState<number>(1);
-  const [filterField] = useState<string>("Kaftans");
+  const [filterField] = useState<string>("Kaftan");
 
   const query: QueryParams = {
     limit,

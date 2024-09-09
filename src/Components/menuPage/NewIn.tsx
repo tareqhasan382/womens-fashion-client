@@ -8,19 +8,21 @@ import { addToCart } from "../../Redux/cardSlice";
 type QueryParams = {
   limit: number;
   page: number;
-  filterField?: string;
+  sortOrder: string;
+  sortField: string;
 };
 const NewIn: React.FC = () => {
   const dispatch = useAppDispatch();
   const [hoveredProductId, setHoveredProductId] = useState<string | null>(null);
   const [limit] = useState<number>(20);
   const [page] = useState<number>(1);
-  const [filterField] = useState<string>("NewIn");
-
+  const sortOrder = "-1";
+  const sortField = "createdAt";
   const query: QueryParams = {
     limit,
     page,
-    filterField,
+    sortOrder,
+    sortField,
   };
   const { data, isLoading } = useProductsQuery(query);
 

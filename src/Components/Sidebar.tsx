@@ -32,8 +32,8 @@ const Sidebar: React.FC<ResponsiveMenuProps> = ({ showNav, setShowNav }) => {
       submenu: [
         { label: "New In", path: "/new-in" },
         { label: "Vacation Edit", path: "/vacation-edit" },
-        { label: "Lucky Sizes", path: "/lucky-sizes" },
-        { label: "Curvy Chic", path: "/curvy-chic" },
+        // { label: "Lucky Sizes", path: "/lucky-sizes" },
+        // { label: "Curvy Chic", path: "/curvy-chic" },
       ],
     },
     {
@@ -50,28 +50,16 @@ const Sidebar: React.FC<ResponsiveMenuProps> = ({ showNav, setShowNav }) => {
       ],
     },
     {
-      label: "Modestwear",
-      submenu: [
-        { label: "Abayas", path: "/modest-dresses/abayas" },
-        { label: "Kaftans", path: "/modest-dresses/kaftans" },
-        { label: "Hijabs", path: "/modest-dresses/hijabs" },
-      ],
+      label: "Hijabs",
+      path: "/hijabs",
     },
     {
-      label: "Accessories",
-      submenu: [
-        { label: "Bags", path: "/accessories/bags" },
-        { label: "Hijabs", path: "/accessories/hijabs" },
-      ],
+      label: "Bags",
+      path: "/bags",
     },
     {
-      label: "Featured",
-      submenu: [
-        { label: "Press", path: "/press" },
-        { label: "Blog Posts", path: "/blog" },
-        { label: "Magazine", path: "/magazine" },
-        { label: "Influencer Edit", path: "/influencer-edit" },
-      ],
+      label: "blog",
+      path: "blog",
     },
     {
       label: "About Us",

@@ -73,7 +73,7 @@ const Beachwear: React.FC = () => {
                   {hoveredProductId === product._id && (
                     <button
                       onClick={() => dispatch(addToCart(product))}
-                      className=" duration-300 w-80 h-[50px] absolute right-2 bg-gray-800 text-white p-2 rounded-md flex items-center justify-center font-bold text-center bottom-28  "
+                      className=" duration-300 w-[90%] h-[50px] absolute right-2 bg-gray-800 text-white p-2 rounded-md flex items-center justify-center font-bold text-center bottom-28  "
                     >
                       <BiShoppingBag size={24} className=" mx-2 " /> Add to Cart
                     </button>

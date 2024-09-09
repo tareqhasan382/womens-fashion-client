@@ -106,11 +106,11 @@ const routes = createBrowserRouter([
         element: <ModestDressesKaftans />,
       },
       {
-        path: "/modest-dresses/hijabs",
+        path: "/hijabs",
         element: <ModestDressesHijabs />,
       },
       {
-        path: "/accessories/bags",
+        path: "/bags",
         element: <AccessoriesBangs />,
       },
       {

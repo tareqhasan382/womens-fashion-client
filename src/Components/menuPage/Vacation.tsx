@@ -15,7 +15,7 @@ const Vacation: React.FC = () => {
   const [hoveredProductId, setHoveredProductId] = useState<string | null>(null);
   const [limit] = useState<number>(20);
   const [page] = useState<number>(1);
-  const [filterField] = useState<string>("Vacation");
+  const [filterField] = useState<string>("vacation");
 
   const query: QueryParams = {
     limit,
