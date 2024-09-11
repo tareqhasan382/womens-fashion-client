@@ -3,8 +3,10 @@ import loadingImage from "../../assets/loading.gif";
 import { useProductsQuery } from "../../Redux/products/productApi";
 import { CalculateDiscountPrice } from "../../utils/CalculateDiscountPrice";
 import { useAppDispatch } from "../../Redux/hooks";
-import { BiShoppingBag } from "react-icons/bi";
+import { BiHeart, BiShoppingBag } from "react-icons/bi";
 import { addToCart } from "../../Redux/cardSlice";
+import { Link } from "react-router-dom";
+import { BsFillEyeFill } from "react-icons/bs";
 type QueryParams = {
   limit: number;
   page: number;
@@ -70,14 +72,27 @@ const Kaftans: React.FC = () => {
                     </p>
                   </div>
                   {/* Show cart only when this product is hovered */}
-                  {hoveredProductId === product._id && (
-                    <button
-                      onClick={() => dispatch(addToCart(product))}
-                      className=" duration-300 w-80 h-[50px] absolute right-2 bg-gray-800 text-white p-2 rounded-md flex items-center justify-center font-bold text-center bottom-28  "
-                    >
-                      <BiShoppingBag size={24} className=" mx-2 " /> Add to Cart
-                    </button>
-                  )}
+                  <div className="absolute right-4 block top-5">
+                    {hoveredProductId === product._id && (
+                      <div className=" flex flex-col gap-2  ">
+                        <button
+                          onClick={() => dispatch(addToCart(product))}
+                          className=" text-black hover:bg-gray-800 hover:text-white duration-300 p-3 rounded-full flex items-center justify-center font-bold right-0"
+                        >
+                          <BiShoppingBag size={24} />
+                        </button>
+                        <button className="text-black hover:bg-gray-800 hover:text-white duration-300 p-3 rounded-full flex items-center justify-center font-bold right-0">
+                          <BiHeart size={24} />
+                        </button>
+                        <Link to={`/details/${hoveredProductId}`}>
+                          {" "}
+                          <button className="text-black hover:bg-gray-800 hover:text-white duration-300 p-3 rounded-full flex items-center justify-center font-bold right-0">
+                            <BsFillEyeFill size={24} />
+                          </button>
+                        </Link>
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))
             ) : (

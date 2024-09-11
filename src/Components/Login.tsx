@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import loginImage from "../assets/login.webp";
 import { toast } from "react-toastify";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../Redux/auth/authApi";
 export interface LoginData {
   email: string;
@@ -76,8 +76,18 @@ const Login: React.FC = () => {
             </button>
           </form>
           {isError && (
-            <p className="text-red-500 mt-2">Login failed. Please try again.</p>
+            <p className="text-red-500 mt-2">
+              Register failed. Please try again.
+            </p>
           )}
+          <div>
+            <h1>
+              Does not have an Account
+              <Link to="/register" className=" underline font-bold ">
+                Register
+              </Link>
+            </h1>
+          </div>
         </div>
       </div>
     </div>

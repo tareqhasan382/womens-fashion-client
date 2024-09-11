@@ -1,7 +1,23 @@
+import { Link } from "react-router-dom";
 import { useProductsQuery } from "../Redux/products/productApi";
 import loadingImage from "../assets/loading.gif";
+import { useState } from "react";
+type QueryParams = {
+  limit: number;
+  page: number;
+  filterField?: string;
+};
 const ProductsPage: React.FC = () => {
-  const { data, isLoading } = useProductsQuery();
+  const [limit] = useState<number>(40);
+  const [page] = useState<number>(1);
+  const [filterField] = useState<string>("vacation");
+
+  const query: QueryParams = {
+    limit,
+    page,
+    filterField,
+  };
+  const { data, isLoading } = useProductsQuery(query);
 
   return (
     <>
@@ -14,7 +30,9 @@ const ProductsPage: React.FC = () => {
           {/* lg:grid-cols-3 max-md:grid-cols-3 max-sm:grid-cols-2 */}
           {data?.data.map((item) => (
             <div key={item._id} className=" ">
-              <img src={item.images[0]} alt={item.name} />
+              <Link to={`/details/${item._id}`}>
+                <img src={item.images[0]} alt={item.name} />
+              </Link>
               <div className=" flex flex-col gap-2 p-2  ">
                 <h1 className=" lg:text-lg lg:font-semibold text-base font-normal ">
                   {item.name}

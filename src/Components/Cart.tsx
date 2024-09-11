@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import emptyCart from "../assets/emptyCart.png";
 import {
   addToCart,
@@ -9,9 +9,12 @@ import {
 import { useAppDispatch, useAppSelector } from "../Redux/hooks";
 import { BiMinusCircle, BiPlusCircle, BiTrash } from "react-icons/bi";
 import { CalculateDiscountPrice } from "../utils/CalculateDiscountPrice";
-
-const Cart: React.FC = () => {
+interface CartPageProps {
+  close: () => void;
+}
+const Cart: React.FC<CartPageProps> = ({ close }) => {
   //=======================Get data=================================
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const { products } = useAppSelector((state) => state.cart);
@@ -115,39 +118,23 @@ const Cart: React.FC = () => {
           {/*==================== Order Now ====================*/}
           {products.length > 0 && (
             <div className=" top-0 w-full p-1">
-              <div className=" relative top-0  flex flex-col text-lg items-center justify-center py-2 outline rounded-md outline-1 outline-black ">
+              <div className=" relative top-0  flex flex-col text-lg items-center justify-center py-2 gap-5 ">
                 {/* <p className=" ">Order Now</p> */}
                 <p>
                   <span className=" font-bold ">{`Total Price: $${totalPrice.toFixed(
                     2
                   )}`}</span>
                 </p>
-                <form
-                  action=""
-                  className=" px-2 lg:w-2/3 w-full flex flex-col gap-2 "
+
+                <button
+                  onClick={() => {
+                    navigate("/checkout");
+                    close();
+                  }}
+                  className=" pl-2 w-full rounded-md h-10 font-bold bg-black text-white cursor-pointer "
                 >
-                  <input
-                    type="text"
-                    placeholder="your name"
-                    className=" pl-2 w-full rounded-md h-10 focus:outline-none "
-                  />
-                  <input
-                    type="text"
-                    placeholder="Phone number"
-                    className=" pl-2 w-full rounded-md h-10 focus:outline-none "
-                  />
-                  <input
-                    type="text"
-                    placeholder="Adress"
-                    className=" pl-2 w-full rounded-md h-10 focus:outline-none "
-                  />
-                  <button
-                    disabled
-                    className=" pl-2 w-full rounded-md h-10 font-bold bg-black text-white cursor-pointer "
-                  >
-                    Payment Now
-                  </button>
-                </form>
+                  proceed checkout
+                </button>
               </div>
             </div>
           )}

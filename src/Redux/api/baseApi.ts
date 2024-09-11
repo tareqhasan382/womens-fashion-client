@@ -6,7 +6,7 @@ export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASEURL,
     prepareHeaders: (headers) => {
-      const authString = localStorage.getItem("auth");
+      const authString = localStorage.getItem("womensAuth");
       const auth = authString ? JSON.parse(authString) : null;
       const token = auth ? auth.accessToken : null;
       if (token) {

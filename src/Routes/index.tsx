@@ -31,6 +31,9 @@ import Magazine from "../Components/menuPage/Magazine";
 import InfluencerEdit from "../Components/menuPage/InfluencerEdit";
 import About from "../Components/menuPage/About";
 import LoveYourPlanet from "../Components/menuPage/LoveYourPlanet";
+import Checkout from "../Components/Checkout";
+import PaymentSuccess from "../Components/PaymentSuccess";
+import PaymentFail from "../Components/PaymentFail";
 
 const routes = createBrowserRouter([
   {
@@ -146,6 +149,18 @@ const routes = createBrowserRouter([
         element: <ProductDetails />,
       },
 
+      {
+        path: "/checkout",
+        element: <Checkout />,
+      },
+      {
+        path: "/payment-success",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "//payment-fail",
+        element: <PaymentFail />,
+      },
       {
         path: "/orders",
         element: <MyOrder />,

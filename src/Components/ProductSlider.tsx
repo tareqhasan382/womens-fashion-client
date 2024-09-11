@@ -6,7 +6,12 @@ import { CalculateDiscountPrice } from "../utils/CalculateDiscountPrice";
 import { FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useProductsQuery } from "../Redux/products/productApi";
-
+import { useState } from "react";
+type QueryParams = {
+  limit: number;
+  page: number;
+  filterField?: string;
+};
 interface ArrowProps {
   onClick?: () => void;
 }
@@ -33,7 +38,16 @@ const SamplePrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
   );
 };
 const ProductSlider: React.FC = () => {
-  const { data } = useProductsQuery();
+  const [limit] = useState<number>(40);
+  const [page] = useState<number>(1);
+  const [filterField] = useState<string>();
+
+  const query: QueryParams = {
+    limit,
+    page,
+    filterField,
+  };
+  const { data } = useProductsQuery(query);
 
   const settings = {
     dots: false,
