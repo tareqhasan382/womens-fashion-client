@@ -17,15 +17,16 @@ interface PaymentData {
 // result?.data?.data?.GatewayPageURL
 
 interface SslCommerzResponse {
-  data: {
-    GatewayPageURL: string;
-    directPaymentURL: string;
-    directPaymentURLBank: string;
-    directPaymentURLCard: string;
-    failedreason: string;
+  // data: {
+  //   GatewayPageURL: string;
+  //   directPaymentURL: string;
+  //   directPaymentURLBank: string;
+  //   directPaymentURLCard: string;
+  //   failedreason: string;
 
-    storeLogo: string;
-  };
+  //   storeLogo: string;
+  // };
+  data: string | URL;
   status: boolean;
 }
 

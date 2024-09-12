@@ -54,15 +54,17 @@ const Checkout: React.FC = () => {
     };
 
     const result = await createPayment(data);
-    const paymentUrl = result?.data?.data?.GatewayPageURL;
+    // console.log("result:", result);
+    // console.log("result?.data?.data:", result?.data?.data);
+    // console.log("result?.data?.status:", result?.data?.status);
+    const paymentUrl = result?.data?.data;
     if (paymentUrl) {
-      // Redirect to the payment gateway
-      window.location.href = paymentUrl;
+      window.location.replace(paymentUrl);
     } else {
       return toast.error("Failed to retrieve payment URL");
     }
-    // console.log(result?.data?.data?.GatewayPageURL);
-    //console.log(result?.data?.status);
+
+    // console.log(result?.data?.status);
   };
   return (
     <div className=" w-full h-full flex items-center justify-center mx-auto mt-10 ">

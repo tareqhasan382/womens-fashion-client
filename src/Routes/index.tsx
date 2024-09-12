@@ -34,6 +34,7 @@ import LoveYourPlanet from "../Components/menuPage/LoveYourPlanet";
 import Checkout from "../Components/Checkout";
 import PaymentSuccess from "../Components/PaymentSuccess";
 import PaymentFail from "../Components/PaymentFail";
+import PaymentCancel from "../Components/PaymentCancel";
 
 const routes = createBrowserRouter([
   {
@@ -158,8 +159,12 @@ const routes = createBrowserRouter([
         element: <PaymentSuccess />,
       },
       {
-        path: "//payment-fail",
+        path: "/payment-fail",
         element: <PaymentFail />,
+      },
+      {
+        path: "/payment-cancel",
+        element: <PaymentCancel />,
       },
       {
         path: "/orders",
