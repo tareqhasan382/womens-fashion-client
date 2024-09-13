@@ -35,6 +35,9 @@ import Checkout from "../Components/Checkout";
 import PaymentSuccess from "../Components/PaymentSuccess";
 import PaymentFail from "../Components/PaymentFail";
 import PaymentCancel from "../Components/PaymentCancel";
+import Profile from "../Components/Profile";
+import ProtectedRoute from "../Components/ProtectedRoute";
+import FavoritesCart from "../Components/FavoritesCart";
 
 const routes = createBrowserRouter([
   {
@@ -153,6 +156,18 @@ const routes = createBrowserRouter([
       {
         path: "/checkout",
         element: <Checkout />,
+      },
+      {
+        path: "/favorite",
+        element: <FavoritesCart />,
+      },
+      {
+        path: "/profile",
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/payment-success",

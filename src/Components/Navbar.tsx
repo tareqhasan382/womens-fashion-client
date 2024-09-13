@@ -13,7 +13,8 @@ import { useAppSelector } from "../Redux/hooks";
 
 const Navbar = () => {
   const { products } = useAppSelector((state) => state.cart);
-  // console.log("Product:", products?.length);
+  const { favoriteProducts } = useAppSelector((state) => state.favorite);
+
   const [showNav, setShowNav] = useState<boolean>(false);
   const [openCart, setOpenCart] = useState<boolean>(false);
   const toggleCart = () => {
@@ -45,8 +46,16 @@ const Navbar = () => {
         </div>
         <div className=" relative w-[150px] flex gap-2 py-1 text-black ">
           <CiSearch size={25} className="cursor-pointer" />
-          <CiUser size={25} className="cursor-pointer" />
-          <FaRegHeart size={25} className="cursor-pointer" />
+          <Link to="/profile">
+            <CiUser size={25} className="cursor-pointer" />
+          </Link>
+          <Link to="/favorite">
+            <span className=" absolute w-[20px] text-center right-16 -top-4 ">
+              {favoriteProducts ? favoriteProducts.length : 0}
+            </span>
+            <FaRegHeart size={25} className="cursor-pointer" />
+          </Link>
+
           <LuShoppingCart
             onClick={toggleCart}
             size={25}
@@ -89,18 +98,6 @@ const Navbar = () => {
                     Vacation Edit
                   </li>
                 </Link>
-                {/* <Link to="/lucky-sizes">
-                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
-                    Lucky Sizes
-                  </li>
-                </Link>
-
-                <Link to="curvy-chic">
-                  {" "}
-                  <li className=" p-2 hover:bg-gray-200 capitalize  ">
-                    Curvy Chic
-                  </li>
-                </Link> */}
               </ul>
             </div>
             {/* Dropdown section end */}
@@ -170,8 +167,8 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="relative group cursor-pointe ">
-            <Link to="blog" className="flex items-center gap-[2px] h-[80px]">
-              blog
+            <Link to="/orders" className="flex items-center gap-[2px] h-[80px]">
+              my orders
             </Link>
           </div>
 

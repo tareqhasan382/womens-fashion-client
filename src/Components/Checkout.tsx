@@ -4,6 +4,7 @@ import { CalculateDiscountPrice } from "../utils/CalculateDiscountPrice";
 import { toast } from "react-toastify";
 import { IProduct } from "../Redux/cardSlice";
 import { useCreatePaymentMutation } from "../Redux/payment/paymentApi";
+import { Link } from "react-router-dom";
 
 const Checkout: React.FC = () => {
   const [createPayment] = useCreatePaymentMutation();
@@ -12,19 +13,7 @@ const Checkout: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [address, setAddress] = useState<string>("");
-  //   const [user, setUser] = useState({
-  //     name: "",
-  //     email: "",
-  //     phone: "",
-  //     address: "",
-  //   });
-  //   // Handle input changes
-  //   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //     setUser({
-  //       ...user,
-  //       [e.target.name]: e.target.value,
-  //     });
-  //   };
+  const { user } = useAppSelector((state) => state.auth);
   const totalPrice: number = products
     .map((item: IProduct) => {
       // Ensure item.price is a string before using replace
@@ -138,12 +127,21 @@ const Checkout: React.FC = () => {
               </div>
               <div className=" w-full flex justify-between p-2 ">
                 <div></div>
-                <button
-                  type="submit"
-                  className=" my-2 px-4 rounded-md py-2 font-bold bg-green-600 text-white cursor-pointer  "
-                >
-                  procced to payment
-                </button>
+
+                {user ? (
+                  <button
+                    type="submit"
+                    className=" my-2 px-4 rounded-md py-2 font-bold bg-green-600 text-white cursor-pointer  "
+                  >
+                    procced to payment
+                  </button>
+                ) : (
+                  <Link to="/login">
+                    <button className=" capitalize my-2 px-4 rounded-md py-2 font-bold bg-green-600 text-white cursor-pointer  ">
+                      login now
+                    </button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>

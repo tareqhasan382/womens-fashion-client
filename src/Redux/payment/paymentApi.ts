@@ -14,18 +14,8 @@ interface PaymentData {
   products?: Product[];
   totalPrice?: number;
 }
-// result?.data?.data?.GatewayPageURL
 
 interface SslCommerzResponse {
-  // data: {
-  //   GatewayPageURL: string;
-  //   directPaymentURL: string;
-  //   directPaymentURLBank: string;
-  //   directPaymentURLCard: string;
-  //   failedreason: string;
-
-  //   storeLogo: string;
-  // };
   data: string | URL;
   status: boolean;
 }
@@ -38,16 +28,8 @@ export const pymentApi = baseApi.injectEndpoints({
         method: "POST",
         body: newData,
       }),
-      invalidatesTags: ["review"],
+      invalidatesTags: ["order"],
     }),
-    // Read all
-    // reviews: build.query({
-    //   query: (id) => ({
-    //     url: `/reviews/${id}`,
-    //     method: "GET",
-    //   }),
-    //   providesTags: ["review"],
-    // }),
   }),
 });
 

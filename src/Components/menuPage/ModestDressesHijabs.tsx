@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import loadingImage from "../../assets/loading.gif";
 import { useProductsQuery } from "../../Redux/products/productApi";
 import { CalculateDiscountPrice } from "../../utils/CalculateDiscountPrice";
-import { useAppDispatch } from "../../Redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
 import { BiHeart, BiShoppingBag } from "react-icons/bi";
 import { addToCart } from "../../Redux/cardSlice";
 import { Link } from "react-router-dom";
 import { BsFillEyeFill } from "react-icons/bs";
+import { toggleFavorite } from "../../Redux/favoritesSlice";
+import { FaHeart } from "react-icons/fa6";
 type QueryParams = {
   limit: number;
   page: number;
@@ -14,6 +16,7 @@ type QueryParams = {
 };
 const ModestDressesHijabs: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { favoriteProducts } = useAppSelector((state) => state.favorite);
   const [hoveredProductId, setHoveredProductId] = useState<string | null>(null);
   const [limit] = useState<number>(20);
   const [page] = useState<number>(1);
@@ -32,6 +35,9 @@ const ModestDressesHijabs: React.FC = () => {
 
   const handleMouseLeave = () => {
     setHoveredProductId(null);
+  };
+  const isProductFavorite = (productId: string) => {
+    return favoriteProducts.some((product) => product._id === productId);
   };
   return (
     <>
@@ -82,7 +88,15 @@ const ModestDressesHijabs: React.FC = () => {
                           <BiShoppingBag size={24} />
                         </button>
                         <button className="text-black hover:bg-gray-800 hover:text-white duration-300 p-3 rounded-full flex items-center justify-center font-bold right-0">
-                          <BiHeart size={24} />
+                          <button
+                            onClick={() => dispatch(toggleFavorite(product))}
+                          >
+                            {isProductFavorite(product._id) ? (
+                              <FaHeart size={24} color="red" />
+                            ) : (
+                              <BiHeart size={24} />
+                            )}
+                          </button>
                         </button>
                         <Link to={`/details/${hoveredProductId}`}>
                           {" "}

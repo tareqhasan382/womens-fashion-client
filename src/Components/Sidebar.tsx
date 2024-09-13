@@ -58,8 +58,8 @@ const Sidebar: React.FC<ResponsiveMenuProps> = ({ showNav, setShowNav }) => {
       path: "/bags",
     },
     {
-      label: "blog",
-      path: "blog",
+      label: "my orders",
+      path: "/orders",
     },
     {
       label: "About Us",

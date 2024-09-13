@@ -18,6 +18,7 @@ const Cart: React.FC<CartPageProps> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const { products } = useAppSelector((state) => state.cart);
+  const { user } = useAppSelector((state) => state.auth);
   const totalPrice: number = products
     .map((item: IProduct) => {
       // Ensure item.price is a string before using replace
@@ -128,7 +129,7 @@ const Cart: React.FC<CartPageProps> = ({ close }) => {
 
                 <button
                   onClick={() => {
-                    navigate("/checkout");
+                    navigate(`${user ? "/checkout" : "/login"}`);
                     close();
                   }}
                   className=" pl-2 w-full rounded-md h-10 font-bold bg-black text-white cursor-pointer "

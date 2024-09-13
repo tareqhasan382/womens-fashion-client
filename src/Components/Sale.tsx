@@ -5,13 +5,16 @@ import loadingImage from "../assets/loading.gif";
 import { useFlatSaleQuery } from "../Redux/products/productApi";
 import { CalculateDiscountPrice } from "../utils/CalculateDiscountPrice";
 import { BiHeart, BiShoppingBag } from "react-icons/bi";
-import { useAppDispatch } from "../Redux/hooks";
+import { useAppDispatch, useAppSelector } from "../Redux/hooks";
 import { addToCart } from "../Redux/cardSlice";
 import { BsFillEyeFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-
+import { toggleFavorite } from "../Redux/favoritesSlice";
+import { FaHeart } from "react-icons/fa";
 const Sale: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { favoriteProducts } = useAppSelector((state) => state.favorite);
+
   const { data, isLoading } = useFlatSaleQuery();
   const [hoveredProductId, setHoveredProductId] = useState<string | null>(null);
 
@@ -22,7 +25,9 @@ const Sale: React.FC = () => {
   const handleMouseLeave = () => {
     setHoveredProductId(null);
   };
-
+  const isProductFavorite = (productId: string) => {
+    return favoriteProducts.some((product) => product._id === productId);
+  };
   return (
     <>
       {isLoading ? (
@@ -90,7 +95,15 @@ const Sale: React.FC = () => {
                           <BiShoppingBag size={24} />
                         </button>
                         <button className="text-black hover:bg-gray-800 hover:text-white duration-300 p-3 rounded-full flex items-center justify-center font-bold right-0">
-                          <BiHeart size={24} />
+                          <button
+                            onClick={() => dispatch(toggleFavorite(product))}
+                          >
+                            {isProductFavorite(product._id) ? (
+                              <FaHeart size={24} color="red" />
+                            ) : (
+                              <BiHeart size={24} />
+                            )}
+                          </button>
                         </button>
                         <Link to={`/details/${hoveredProductId}`}>
                           {" "}
