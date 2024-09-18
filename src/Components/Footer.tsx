@@ -1,5 +1,6 @@
 import pyment_methods from "../assets/Payment_Methods.webp";
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
   return (
     <footer className="w-full h-full lg:px-28 px-2 py-6 gap-10 bg-black text-white ">
       <div className="w-full h-full grid lg:grid-cols-4 md:grid-cols-2 mx-auto gap-5">
@@ -34,7 +35,7 @@ const Footer = () => {
       <div className=" w-full h-[50px] flex flex-col pt-10 items-center justify-center  ">
         <img src={pyment_methods} alt="pyment_methods" className="" />
         <h1 className=" text-center lg:text-base text-[12px] ">
-          Copyright © 2023 Couturelabs. All rights reserved.
+          Copyright © {currentYear} Tareq Hasan. All rights reserved.
         </h1>
       </div>
     </footer>
