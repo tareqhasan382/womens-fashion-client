@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import loadingImage from "../assets/loading.gif";
+import { useAppDispatch } from "../Redux/hooks";
+import { clearCart } from "../Redux/cardSlice";
 const PaymentSuccess: React.FC = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(clearCart());
+  }, [dispatch]);
   const isLoading = false;
+
   return (
     <>
       {isLoading ? (

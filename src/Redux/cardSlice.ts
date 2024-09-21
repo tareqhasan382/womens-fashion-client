@@ -96,7 +96,12 @@ const cartSlice = createSlice({
         icon: false,
       });
     },
+    clearCart: (state) => {
+      state.products = [];
+      localStorage.removeItem("cartItem");
+    },
   },
 });
-export const { addToCart, removeOne, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeOne, removeFromCart, clearCart } =
+  cartSlice.actions;
 export default cartSlice.reducer;

@@ -2,9 +2,10 @@
 import React from "react";
 import { useOrdersQuery } from "../Redux/order/orderApi";
 import loadingImage from "../assets/loading.gif";
+
 const MyOrder: React.FC = () => {
-  const { data, isLoading } = useOrdersQuery(undefined);
-  console.log("data:", data?.data);
+  const { data, isLoading, isError } = useOrdersQuery(undefined);
+
   return (
     <>
       {isLoading ? (
@@ -66,7 +67,16 @@ const MyOrder: React.FC = () => {
                 ))}
               </div>
             ) : (
-              <div></div>
+              <div className=" w-full h-auto flex flex-col items-center justify-center ">
+                {!isError && (
+                  <h1 className=" text-2xl font-bold ">Order is empty</h1>
+                )}
+                {isError && (
+                  <h1 className=" text-2xl font-bold text-red-500 ">
+                    Unauthorized
+                  </h1>
+                )}
+              </div>
             )}
           </div>
         </div>

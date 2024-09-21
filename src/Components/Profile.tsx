@@ -23,7 +23,7 @@ const Profile: React.FC = () => {
             <div className=" w-full h-full  p-4 lg:flex items-center gap-10 mx-auto ">
               {/* <h1>Profile Page</h1> */}
               <div className="    ">
-                {user ? (
+                {user?.image ? (
                   <img
                     src={user?.image}
                     alt="profile-image"
@@ -31,7 +31,7 @@ const Profile: React.FC = () => {
                   />
                 ) : (
                   <img
-                    src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg"
+                    src="https://static.vecteezy.com/system/resources/previews/005/544/718/original/profile-icon-design-free-vector.jpg"
                     alt="profile-image"
                     className=" w-[180px] h-[180px] object-cover rounded-full "
                   />
