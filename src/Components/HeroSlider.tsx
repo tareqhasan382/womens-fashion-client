@@ -51,7 +51,7 @@ const HeroSlider: React.FC = () => {
         <Slider {...settings}>
           {heroData.map((data) => (
             <div key={data.id}>
-              <div className="bg-red-200 flex items-center justify-center">
+              <div className=" flex items-center justify-center">
                 {/* Large screen image */}
                 <div className="hidden lg:block w-screen h-auto">
                   <img

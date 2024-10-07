@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-export const BASEURL = "https://womens-backend.vercel.app/api/"; //"https://womens-backend.vercel.app/api/";
-//  http://localhost:8000 ||
+export const BASEURL = "https://womens-backend.vercel.app/api/"; //"https://womens-backend.vercel.app/api/"; //"https://womens-backend.vercel.app/api/";
+//  http://localhost:8000/api/ ||
 export const baseApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({

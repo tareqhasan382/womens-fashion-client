@@ -9,9 +9,12 @@ import { useState } from "react";
 import { IoMenuSharp } from "react-icons/io5";
 import Sidebar from "./Sidebar";
 import CartPage from "./CartPage";
-import { useAppSelector } from "../Redux/hooks";
+import { useAppDispatch, useAppSelector } from "../Redux/hooks";
+import { userLoggedOut } from "../Redux/auth/authSlice";
 
 const Navbar = () => {
+  const dispatch = useAppDispatch();
+  const auth = useAppSelector((state) => state.auth);
   const { products } = useAppSelector((state) => state.cart);
   const { favoriteProducts } = useAppSelector((state) => state.favorite);
 
@@ -68,8 +71,8 @@ const Navbar = () => {
       </div>
       {/* logo section end*/}
       {/* dekstop menu section start*/}
-      <div className=" ">
-        <div className=" w-full max-md:hidden uppercase flex xl:gap-5 text-black xl:text-base md:text-[14px] portrait:md:text-[12px]  xl:font-medium md:font-light font-normal gap-2 ">
+      <div className=" w-full items-end justify-end ">
+        <div className="  w-full max-md:hidden uppercase xl:gap-5 text-black xl:text-base md:text-[14px] portrait:md:text-[12px]  xl:font-medium md:font-light font-normal gap-2 flex flex-row items-end justify-end ">
           <div className=" text-red-500 ">
             <Link className="flex items-center gap-[2px] h-[80px]" to="/sale">
               Sale
@@ -172,22 +175,36 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <div>
-            <Link
-              className="flex items-center gap-[2px] h-[80px]"
-              to="/about-us"
+          {auth?.user ? (
+            <div
+              className=" flex items-center gap-[2px] h-[80px] cursor-pointer "
+              onClick={() => dispatch(userLoggedOut())}
             >
-              About Us
-            </Link>
-          </div>
-          <div>
+              <span className=" w-[120px] h-[40px] bg-blue-500 text-white hover:bg-blue-400 duration-500 text-center flex items-center justify-center rounded ">
+                Logout
+              </span>
+            </div>
+          ) : (
+            <div className="">
+              <Link
+                className="flex items-center justify-center gap-[2px] h-[80px] "
+                to="/login"
+              >
+                <span className=" w-[120px] h-[40px] bg-blue-500 text-white hover:bg-blue-400 duration-500 text-center flex items-center justify-center rounded ">
+                  Log in
+                </span>
+              </Link>
+            </div>
+          )}
+
+          {/* <div>
             <Link
               className="flex items-center gap-[2px] h-[80px]"
               to="/love-your-planet"
             >
               Love your planet
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
       {/*dekstop menu section end*/}
