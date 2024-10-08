@@ -56,10 +56,10 @@ const Login: React.FC = () => {
           body: JSON.stringify({ code: authResult.code }),
         });
         const data = await res.json();
-        console.log("Response data:", data);
+        // console.log("Response data:", data);
         if (data.success) {
-          navigate("/");
           dispatch(userLoggedIn(data?.data));
+          navigate("/");
           toast.success("Google logged in successfully", { autoClose: 1000 });
         } else {
           toast.error("Google login failed", { autoClose: 5000 });
