@@ -56,6 +56,7 @@ const Login: React.FC = () => {
           body: JSON.stringify({ code: authResult.code }),
         });
         const data = await res.json();
+        console.log("Response data:", data);
         if (data.success) {
           navigate("/");
           dispatch(userLoggedIn(data?.data));
@@ -64,7 +65,7 @@ const Login: React.FC = () => {
           toast.error("Google login failed", { autoClose: 5000 });
         }
 
-        // console.log("Response data:", data);
+        console.log("Response data.success:", data);
       } catch (error) {
         console.error("CONNECTION_REFUSED:", error);
         toast.error("Google login failed", { autoClose: 5000 });
@@ -78,6 +79,8 @@ const Login: React.FC = () => {
     onSuccess: responseGoogle,
     onError: (error) => console.log("Login Failed:", error),
     flow: "auth-code",
+    //  ux_mode: "redirect",
+    //  redirect_uri: "http://localhost:5173/callback",
   });
   return (
     <div className=" w-full h-full flex items-start justify-center md:pt-20  ">
