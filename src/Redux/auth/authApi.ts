@@ -22,13 +22,13 @@ export const authApi = baseApi.injectEndpoints({
           // console.log("queryFulfilled result:",result.data.token)
           const user = jwtDecode(result?.data?.token);
           // console.log("user token:",user)
-          localStorage.setItem(
-            "womensAuth",
-            JSON.stringify({
-              accessToken: result?.data?.token,
-              user: user,
-            })
-          );
+          // localStorage.setItem(
+          //   "womensAuth",
+          //   JSON.stringify({
+          //     accessToken: result?.data?.token,
+          //     user: user,
+          //   })
+          // );
 
           dispatch(
             userLoggedIn({

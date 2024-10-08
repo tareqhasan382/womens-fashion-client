@@ -65,7 +65,7 @@ const Login: React.FC = () => {
           toast.error("Google login failed", { autoClose: 5000 });
         }
 
-        console.log("Response data.success:", data);
+        // console.log("Response data.success:", data);
       } catch (error) {
         console.error("CONNECTION_REFUSED:", error);
         toast.error("Google login failed", { autoClose: 5000 });

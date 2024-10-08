@@ -16,9 +16,17 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     userLoggedIn: (state, action) => {
-      // console.log("action:", action.payload);
+      console.log("action:", action.payload); //  accessToken
+
       state.accessToken = action.payload.accessToken;
       state.user = action.payload.user;
+      localStorage.setItem(
+        "womensAuth",
+        JSON.stringify({
+          accessToken: action.payload.accessToken,
+          user: action.payload.user,
+        })
+      );
     },
     userLoggedOut: (state) => {
       // Remove item from localStorage
